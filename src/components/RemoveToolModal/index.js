@@ -9,14 +9,14 @@ import api from '../../services/api';
 const RemoveToolModal = ({ isOpen, toggleModal, id, title, removeToolFromList }) => {
   const handleConfirm = async () => {
 
-    const response = await api.delete(`/tools/${id}`);
+    try {
+      await api.delete(`/tools/${id}`);
 
-    if (response.status === 204) {
       toast.success('Tool successfully removed.');
       removeToolFromList();
       toggleModal('remove');
-    } else {
-      toast.error(response.data.error);
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 

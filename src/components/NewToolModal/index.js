@@ -30,19 +30,19 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
       return;
     }
 
-    const response = await api.post("/tools", {
-      title,
-      link,
-      description,
-      tags: tags !== '' ? tags.split(' ') : []
-    });
+    try {
+      const response = await api.post("/tools", {
+        title,
+        link,
+        description,
+        tags: tags !== '' ? tags.split(' ') : []
+      });
 
-    if (response.status === 201) {
       addToolInList(response.data);
       toast.success('New tool added successfully');
       toggleModal('new');
-    } else {
-      toast.error(response.data.error);
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 

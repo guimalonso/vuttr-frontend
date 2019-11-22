@@ -16,9 +16,11 @@ export default function Main() {
   const [removeToolModalOpen, setRemoveToolModalOpen] = useState(false);
   const [removeToolId, setRemoveToolId] = useState('');
   const [removeToolTitle, setRemoveToolTitle] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadTools() {
+      setLoading(true);
 
       let params = (search !== '') ? { tag: search } : {};
       if (tagSearch) {
@@ -28,6 +30,7 @@ export default function Main() {
       const response = await api.get('tools', { params });
 
       setTools(response.data);
+      setLoading(false);
     }
 
     loadTools();
@@ -83,6 +86,8 @@ export default function Main() {
         </Controls>
 
         <ToolList>
+          {loading && <li>Loading...</li>}
+          {tools.length === 0 && !loading && <li>No results found.</li>}
           {tools.map(tool => (
             <li key={tool._id}>
               <Tool
