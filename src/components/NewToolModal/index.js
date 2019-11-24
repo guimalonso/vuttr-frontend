@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { MdAdd } from 'react-icons/md';
 
+import { Form } from './styles';
 import api from '../../services/api';
 
 const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
@@ -56,44 +57,46 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
     >
       <h1><MdAdd size={35} /> Add new Tool</h1>
 
-      <label htmlFor="title">Tool name</label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        value={title}
-        onChange={event => setTitle(event.target.value)}
-      />
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="title">Tool name</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value={title}
+          onChange={event => setTitle(event.target.value)}
+        />
 
-      <label htmlFor="link">Tool link</label>
-      <input
-        type="text"
-        name="link"
-        id="link"
-        value={link}
-        onChange={event => setLink(event.target.value)}
-      />
+        <label htmlFor="link">Tool link</label>
+        <input
+          type="text"
+          name="link"
+          id="link"
+          value={link}
+          onChange={event => setLink(event.target.value)}
+        />
 
-      <label htmlFor="description">Tool description</label>
-      <textarea
-        name="description"
-        id="description"
-        rows={3}
-        value={description}
-        onChange={event => setDescription(event.target.value)}
-      ></textarea>
+        <label htmlFor="description">Tool description</label>
+        <textarea
+          name="description"
+          id="description"
+          rows={3}
+          value={description}
+          onChange={event => setDescription(event.target.value)}
+        ></textarea>
 
-      <label htmlFor="tags">Tags</label>
-      <input
-        type="text"
-        name="tags"
-        id="tags"
-        value={tags}
-        onChange={event => setTags(event.target.value)}
-      />
+        <label htmlFor="tags">Tags</label>
+        <input
+          type="text"
+          name="tags"
+          id="tags"
+          value={tags}
+          onChange={event => setTags(event.target.value)}
+        />
 
-      <button className="submit-button" onClick={handleSubmit}>Add Tool</button>
-      <button className="cancel-button" type="button" onClick={() => toggleModal('new')}>Cancel</button>
+        <button className="submit-button" type="submit">Add Tool</button>
+        <button className="cancel-button" type="button" onClick={() => toggleModal('new')}>Cancel</button>
+      </Form>
     </Modal>
   );
 };

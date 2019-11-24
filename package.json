@@ -20,9 +20,6 @@
     "build": "next build",
     "start": "next start"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

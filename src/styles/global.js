@@ -77,13 +77,6 @@ export default createGlobalStyle`
       padding: 20px 0;
     }
 
-    input, textarea {
-      width: 100%;
-      margin-bottom: 10px;
-      border: 1px solid #0e995d;
-      padding: 5px;
-    }
-
     div {
       margin-top: 10px;
       text-align: right;
