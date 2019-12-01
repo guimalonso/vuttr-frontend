@@ -6,7 +6,7 @@ import Tool from '../../components/Tool';
 import NewToolModal from '../../components/NewToolModal';
 import RemoveToolModal from '../../components/RemoveToolModal';
 
-import { Content, Controls, ToolList } from './styles';
+import { Content, Controls, ToolList } from '../../styles/Main';
 
 export default function Main() {
   const [tools, setTools] = useState([]);

@@ -15,8 +15,8 @@ function App() {
       <Head>
         <title>VUTTR</title>
       </Head>
-      <Main />
       <GlobalStyle />
+      <Main />
       <ToastContainer autoClose={3000} />
     </>
   );
