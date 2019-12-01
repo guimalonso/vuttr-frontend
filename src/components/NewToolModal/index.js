@@ -40,6 +40,10 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
       });
 
       addToolInList(response.data);
+      setTitle('');
+      setLink('');
+      setDescription('');
+      setTags('');
       toast.success('New tool added successfully');
       toggleModal('new');
     } catch (error) {
