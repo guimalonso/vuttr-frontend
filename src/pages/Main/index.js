@@ -10,6 +10,7 @@ import { Content, Controls, ToolList } from '../../styles/Main';
 
 export default function Main() {
   const [tools, setTools] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [search, setSearch] = useState('');
   const [tagSearch, setTagSearch] = useState(0);
   const [newToolModalOpen, setNewToolModalOpen] = useState(false);
@@ -18,23 +19,38 @@ export default function Main() {
   const [removeToolTitle, setRemoveToolTitle] = useState('');
   const [loading, setLoading] = useState(true);
 
+  // Load tools from API
   useEffect(() => {
     async function loadTools() {
       setLoading(true);
 
-      let params = (search !== '') ? { tag: search } : {};
-      if (tagSearch) {
-        params = { ...params, tagSearch };
-      }
+      const { data } = await api.get('tools');
 
-      const response = await api.get('tools', { params });
-
-      setTools(response.data);
+      setTools(data);
+      setSearchResults(data);
       setLoading(false);
     }
 
     loadTools();
-  }, [search, tagSearch]);
+  }, []);
+
+  // Filter results by search terms and options
+  useEffect(() => {
+    const filterData = tools.filter(tool => {
+      if (tagSearch) {
+        return (search === '' || tool.tags.includes(search));
+      }
+
+      return (
+        tool.title.includes(search) ||
+        tool.link.includes(search) ||
+        tool.description.includes(search) ||
+        tool.tags.includes(search)
+      );
+    });
+
+    setSearchResults(filterData);
+  }, [tools, search, tagSearch]);
 
   const handleChange = e => {
     setSearch(e.target.value);
@@ -87,11 +103,11 @@ export default function Main() {
 
         <ToolList>
           {loading && <li>Loading...</li>}
-          {tools.length === 0 && !loading && <li>No results found.</li>}
-          {tools.map(tool => (
-            <li key={tool._id}>
+          {searchResults.length === 0 && !loading && <li>No results found.</li>}
+          {searchResults.map(item => (
+            <li key={item._id}>
               <Tool
-                data={tool}
+                data={item}
                 searchTerm={search}
                 removeAction={openRemoveToolModal}
               />
