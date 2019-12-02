@@ -62,7 +62,7 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
       <h1><MdAdd size={35} /> Add new Tool</h1>
 
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="title">Tool name</label>
+        <label htmlFor="title">Tool name (*)</label>
         <input
           type="text"
           name="title"
@@ -71,7 +71,7 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
           onChange={event => setTitle(event.target.value)}
         />
 
-        <label htmlFor="link">Tool link</label>
+        <label htmlFor="link">Tool link (*)</label>
         <input
           type="text"
           name="link"
@@ -80,7 +80,7 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
           onChange={event => setLink(event.target.value)}
         />
 
-        <label htmlFor="description">Tool description</label>
+        <label htmlFor="description">Tool description (*)</label>
         <textarea
           name="description"
           id="description"
@@ -97,6 +97,8 @@ const NewToolModal = ({ isOpen, toggleModal, addToolInList }) => {
           value={tags}
           onChange={event => setTags(event.target.value)}
         />
+
+        <p>(*): Required fields</p>
 
         <button className="submit-button" type="submit">Add Tool</button>
         <button className="cancel-button" type="button" onClick={() => toggleModal('new')}>Cancel</button>
