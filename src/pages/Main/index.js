@@ -37,15 +37,17 @@ export default function Main() {
   // Filter results by search terms and options
   useEffect(() => {
     const filterData = tools.filter(tool => {
+      const { title, link, description, tags } = tool;
+
       if (tagSearch) {
-        return (search === '' || tool.tags.includes(search));
+        return (search === '' || tags.includes(search));
       }
 
       return (
-        tool.title.includes(search) ||
-        tool.link.includes(search) ||
-        tool.description.includes(search) ||
-        tool.tags.includes(search)
+        title.includes(search) ||
+        link.includes(search) ||
+        description.includes(search) ||
+        tags.includes(search)
       );
     });
 
